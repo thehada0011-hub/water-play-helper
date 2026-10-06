@@ -776,17 +776,17 @@ body[data-view="intro"] .timerbar,body[data-view="intro"] .toast{display:none!im
 }
 @media screen{
   /* 입력 줄: 글씨는 위, 입력칸은 아래 — 두 칸을 나란히 (측정 시각 | 이용객 수, 넣은 시각 | 넣은 양) */
-  .mtime,.dact{display:grid!important;grid-template-columns:1fr 1fr;column-gap:10px;row-gap:4px;align-items:center}
+  .mtime,.dact{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:10px;row-gap:4px;align-items:center}
   .mtime>label,.ut{font-size:12.5px;font-weight:700;color:var(--muted);line-height:1.2}
   .mtime>label{grid-column:1;grid-row:1}
   .mtime>button[data-nowt]{grid-column:1;grid-row:1;justify-self:end;min-height:0;padding:0 2px;font-size:12.5px}
-  .mtime>input{grid-column:1;grid-row:2;width:100%!important;height:40px!important;font-size:15px!important}
-  .mtime>.usr{grid-column:2;grid-row:1 / span 2;display:grid!important;grid-template-columns:1fr auto;row-gap:4px;column-gap:6px;align-items:center;margin:0!important;padding:0!important;border:none}
+  .mtime>input{grid-column:1;grid-row:2;min-width:0;width:100%!important;height:40px!important;font-size:15px!important}
+  .mtime>.usr{grid-column:2;grid-row:1 / span 2;display:grid!important;grid-template-columns:minmax(0,1fr) auto;min-width:0;row-gap:4px;column-gap:6px;align-items:center;margin:0!important;padding:0!important;border:none}
   .usr .ut,.damt .ut{grid-column:1 / -1}
   .usr input{grid-column:1;width:100%!important;height:40px!important;font-size:16px!important;text-align:center}
   .usr .uu{font-size:13px;font-weight:600}
   .dact>.hint,.dact>.btn{grid-column:1 / -1}
-  .dact .damt{display:grid!important;grid-template-columns:1fr auto;row-gap:4px;column-gap:6px;align-items:center;margin:0!important;font-weight:600}
+  .dact .damt{display:grid!important;grid-template-columns:minmax(0,1fr) auto;min-width:0;row-gap:4px;column-gap:6px;align-items:center;margin:0!important;font-weight:600}
   .dact .damt input{width:100%!important;height:40px!important;font-size:16px!important}
   .dact #doseAt{grid-column:1 / -1;width:100%!important}
   .mtime>.usr input{width:100%!important;height:40px!important;font-size:16px!important}
