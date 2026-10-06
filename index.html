@@ -827,6 +827,12 @@ body[data-view="intro"] .timerbar,body[data-view="intro"] .toast{display:none!im
 .ktest>div{flex:1;min-width:0}
 .ktest small{display:block;color:var(--muted);font-size:12px}
 .kform{flex-direction:column;gap:8px;border-top:1px dashed var(--line);padding-top:10px}
+/* 글자를 크게 쓰는 폰(카톡 글자 확대·아이폰 큰 글씨)에서도 칸이 넘치지 않게 */
+input[type="date"].fld,input[type="time"].fld{-webkit-appearance:none;appearance:none;display:block;min-width:0;max-width:100%;text-align:left}
+input[type="date"].fld::-webkit-date-and-time-value,input[type="time"].fld::-webkit-date-and-time-value{text-align:left;margin:0}
+.grid2:has(input[type="date"]){grid-template-columns:repeat(auto-fit,minmax(min(100%,10em),1fr))}
+.kfr{flex-wrap:wrap;row-gap:2px}
+.kfr .kd{flex:1 1 13em}
 .kform:not([hidden]){display:flex}
 .kti{display:grid;grid-template-columns:5.6em minmax(0,1fr) minmax(0,1.3fr);gap:6px;align-items:center}
 .kti .lb{font-size:13px}
