@@ -1461,7 +1461,7 @@ function cardTableHTML(t, ti, fill) {
       var key = 't' + ti + ':r' + c.r + 'c' + c.c, ps = c.p.length ? c.p : [{ t: '', pt: 10, b: false, sp: 0, al: 3, f: '돋움체' }];
       var v = fill && fill[key];
       if (v !== undefined) { var arr = Array.isArray(v) ? v : [v]; var base = ps[0]; ps = arr.map(function (s, i) { var q = ps[i] || base; return { t: s, pt: q.pt, b: q.b, sp: q.sp, al: q.al, f: q.f }; }); }
-      var bd = ['left', 'right', 'top', 'bottom'].map(function (side, k) { return 'border-' + side + ':' + (c.b[k] ? '.12mm solid #000' : 'none'); }).join(';');
+      var bd = ['left', 'right', 'top', 'bottom'].map(function (side, k) { return 'border-' + side + ':' + (c.b[k] ? 'var(--cf-bw,.12mm) solid #000' : 'none'); }).join(';');
       h += '<td colspan="' + c.cs + '" rowspan="' + c.rs + '" style="' + bd + ';padding:' + c.pad[2] + 'mm ' + c.pad[1] + 'mm ' + c.pad[3] + 'mm ' + c.pad[0] + 'mm;vertical-align:' + VA[c.va] + '">' +
         ps.map(function (p) {
           return '<div style="font-family:' + cardFaceCSS(p.f) + ';font-size:' + p.pt + 'pt;' + (p.b ? 'font-weight:700;' : '') + 'letter-spacing:' + (p.sp / 100) + 'em;text-align:' + AL[p.al] + (p.al === 4 ? ';text-align-last:justify' : '') + '">' + (cardEsc(p.t) || '&nbsp;') + '</div>';
@@ -3393,7 +3393,7 @@ function hwpCard(TPL, pages) {
     var c = kst.cache; if (!c) return;
     var R = kPages(c.f, c.y, c.per, c.days), box = $('kPreview');
     box.hidden = false; box.innerHTML = '<div class="kpv-in">' + cardHTML(CARD_FORM, R.pages) + '</div>';
-    var inner = box.firstChild; cardFit(inner);
+    var inner = box.firstChild; kScale(); cardFit(inner);
     $('cardPrint').innerHTML = inner.innerHTML;
     $('kPrev').textContent = '미리 보기 닫기';
     kScale();
@@ -3401,6 +3401,8 @@ function hwpCard(TPL, pages) {
   function kScale() {
     var box = $('kPreview'), inner = box.firstChild; if (!inner || box.hidden) return;
     var s = Math.min(1, box.clientWidth / inner.offsetWidth);
+    // 줄여 보이면 0.12mm 선이 1px보다 가늘어져 아이폰에서 사라지므로, 화면에서만 줄인 만큼 선을 굵게 한다 (인쇄는 원래 굵기)
+    inner.style.setProperty('--cf-bw', s < 1 ? (0.8 / s).toFixed(2) + 'px' : '.12mm');
     inner.style.transform = 'scale(' + s + ')'; box.style.height = Math.ceil(inner.offsetHeight * s) + 'px';
   }
   // 입력이 바뀌면 미리 보기는 닫는다 (인쇄할 때 다시 그린다)
